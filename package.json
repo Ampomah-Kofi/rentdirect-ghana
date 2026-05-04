@@ -5,9 +5,12 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types --disable-warning=MODULE_TYPELESS_PACKAGE_JSON tests/run-tests.ts"
   },
   "dependencies": {
+    "lucide-react": "^1.7.0",
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4"

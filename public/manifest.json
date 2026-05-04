@@ -1,0 +1,48 @@
+{
+  "name": "RentDirect Ghana",
+  "short_name": "RentDirect",
+  "description": "Find rooms without agents anywhere in Ghana. No commissions, no middlemen.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0F6E56",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "utilities"],
+  "lang": "en-GH",
+  "shortcuts": [
+    {
+      "name": "Browse Rooms",
+      "short_name": "Browse",
+      "description": "Find a room to rent",
+      "url": "/",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "List a Room",
+      "short_name": "List",
+      "description": "Add your rental listing",
+      "url": "/landlord/upload",
+      "icons": [{ "src": "/favicon.svg", "sizes": "any" }]
+    }
+  ]
+}

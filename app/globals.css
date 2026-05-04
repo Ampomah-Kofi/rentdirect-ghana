@@ -1,26 +1,107 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-brand: #0B6B4B;
+  --color-brand-hover: #07543B;
+  --color-brand-dark: #06251D;
+  --color-brand-light: #E8F8EF;
+  --color-surface: #FFF8EA;
+  --color-ink: #101A18;
+  --color-clay: #B85B34;
+  --color-gold: #F2B84B;
+  --font-sans: "Aptos", "Segoe UI", "Trebuchet MS", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideRight {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+@keyframes loaderOut {
+  0%   { opacity: 1; transform: scale(1); }
+  80%  { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.03); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+@keyframes floatY {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes softGlow {
+  0%, 100% { opacity: 0.55; transform: translate3d(0, 0, 0) scale(1); }
+  50% { opacity: 0.9; transform: translate3d(10px, -8px, 0) scale(1.06); }
+}
+@keyframes revealScale {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+.animate-fade-up   { animation: fadeUp 0.6s ease both; }
+.animate-fade-in   { animation: fadeIn 0.5s ease both; }
+.animate-float     { animation: floatY 3s ease-in-out infinite; }
+.animate-float-delay { animation: floatY 3s ease-in-out 1.5s infinite; }
+.animate-reveal-scale { animation: revealScale 0.5s ease both; }
 
+* { box-sizing: border-box; }
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(242, 184, 75, 0.18), transparent 28rem),
+    radial-gradient(circle at 92% 0%, rgba(11, 107, 75, 0.12), transparent 24rem),
+    linear-gradient(180deg, #FFF8EA 0%, #F6F1E5 48%, #FFFFFF 100%);
+  color: #101A18;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #F2B84B;
+  color: #101A18;
+}
+
+.rd-grain {
+  position: relative;
+}
+
+.rd-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image:
+    radial-gradient(circle at 1px 1px, #101A18 1px, transparent 0);
+  background-size: 18px 18px;
+}
+
+.rd-card {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(16, 26, 24, 0.08);
+  box-shadow: 0 18px 50px rgba(16, 26, 24, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.rd-button-primary {
+  background: linear-gradient(135deg, #0B6B4B 0%, #073B2D 100%);
+  color: white;
+  box-shadow: 0 14px 30px rgba(11, 107, 75, 0.24);
+}
+
+.rd-button-primary:hover {
+  background: linear-gradient(135deg, #0D7A56 0%, #06251D 100%);
+}
+
+.rd-kente-strip {
+  background:
+    linear-gradient(90deg, #0B6B4B 0 18%, #F2B84B 18% 32%, #B85B34 32% 46%, #101A18 46% 58%, #0B6B4B 58% 100%);
 }
