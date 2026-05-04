@@ -50,3 +50,17 @@ test("launch page captures local pilot interest", async ({ page }) => {
   await expect(page.getByText("Kofi Ampomah")).toBeVisible();
   await expect(page.getByText("Diaspora helper - Kumasi")).toBeVisible();
 });
+
+test("trust and legal pages render production readiness content", async ({ page }) => {
+  await page.goto("/safety");
+  await expect(page.getByRole("heading", { name: "Renting should not feel like gambling." })).toBeVisible();
+  await expect(page.getByText("Visit the room before paying any money.")).toBeVisible();
+
+  await page.goto("/privacy");
+  await expect(page.getByRole("heading", { name: "Data protection must be designed in early." })).toBeVisible();
+  await expect(page.getByText("Sensitive landlord data")).toBeVisible();
+
+  await page.goto("/terms");
+  await expect(page.getByRole("heading", { name: "Clear rules build trust." })).toBeVisible();
+  await expect(page.getByText("Prototype status")).toBeVisible();
+});

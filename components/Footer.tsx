@@ -25,10 +25,19 @@ export default function Footer() {
     {
       title: "Trust",
       links: [
-        { href: "/demo#tenant-safety", label: "Tenant Safety" },
+        { href: "/safety", label: "Safety Center" },
         { href: "/demo#reports", label: "Report Flow" },
         { href: "/demo#payments", label: "MoMo Receipts" },
         { href: "/demo#testing", label: "Testing Checklist" },
+      ],
+    },
+    {
+      title: "Company",
+      links: [
+        { href: "/launch", label: "Launch Plan" },
+        { href: "/privacy", label: "Privacy" },
+        { href: "/terms", label: "Terms" },
+        { href: "/admin", label: "Operations" },
       ],
     },
   ];
@@ -54,7 +63,7 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-8">
           <div className="col-span-2">
             <div className="flex items-center gap-2 mb-3">
               <LogoMark size={30} />
