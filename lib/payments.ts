@@ -47,3 +47,7 @@ export function getPaidPaymentTotal(payments: Payment[]): number {
     payment.status === "paid" ? sum + payment.amount : sum
   ), 0);
 }
+
+export function sortPaymentsNewest(payments: Payment[]): Payment[] {
+  return [...payments].sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+}

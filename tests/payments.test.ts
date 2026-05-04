@@ -5,6 +5,7 @@ import {
   getPaymentsForLandlord,
   getPaymentsForListing,
   PAYMENT_METHOD_LABELS,
+  sortPaymentsNewest,
 } from "../lib/payments.ts";
 import type { Room } from "../lib/types.ts";
 import type { TestCase } from "./monetization.test.ts";
@@ -87,6 +88,15 @@ export const paymentTests: TestCase[] = [
       assert.equal(PAYMENT_METHOD_LABELS.momo_mtn, "MTN Mobile Money");
       assert.equal(PAYMENT_METHOD_LABELS.momo_vodafone, "Vodafone Cash");
       assert.equal(PAYMENT_METHOD_LABELS.momo_airteltigo, "AirtelTigo Money");
+    },
+  },
+  {
+    name: "payments sort newest first",
+    run: () => {
+      const older = createPayment({ listing: makeRoom({ id: "older" }), amount: 50, method: "momo_mtn", phone: "0244123456", timestamp: "2026-01-01T00:00:00.000Z" });
+      const newer = createPayment({ listing: makeRoom({ id: "newer" }), amount: 100, method: "momo_mtn", phone: "0244123456", timestamp: "2026-02-01T00:00:00.000Z" });
+
+      assert.deepEqual(sortPaymentsNewest([older, newer]).map((payment) => payment.listing_id), ["newer", "older"]);
     },
   },
 ];

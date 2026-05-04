@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Clock, CheckCircle2, XCircle, ChevronDown, ChevronUp, X, RotateCcw } from "lucide-react";
+import { Clock, CheckCircle2, XCircle, ChevronDown, ChevronUp, X, RotateCcw, Copy } from "lucide-react";
 import type { Room } from "@/lib/types";
 import { getPaidListingRevenue, getPendingListingRevenue } from "@/lib/monetization";
 import { getOpenReports, REPORT_REASON_LABELS } from "@/lib/reports";
@@ -9,7 +9,7 @@ import { useToast } from "@/components/providers/ToastProvider";
 import { useListings } from "@/components/providers/ListingsProvider";
 import { useReports } from "@/components/providers/ReportsProvider";
 import { usePayments } from "@/components/providers/PaymentsProvider";
-import { getPaidPaymentTotal } from "@/lib/payments";
+import { getPaidPaymentTotal, PAYMENT_METHOD_LABELS, sortPaymentsNewest } from "@/lib/payments";
 import Nav from "@/components/Nav";
 
 type AdminAction = "approve_paid" | "approve_free" | "reject";
@@ -232,13 +232,15 @@ export default function AdminDashboardPage() {
   const { reports, resolveReportById, resetReports } = useReports();
   const { payments, resetPayments } = usePayments();
   const [actioned, setActioned] = useState<ActionRecord[]>([]);
-  const [activeTab, setActiveTab] = useState<"pending" | "reports" | "actioned">("pending");
+  const [activeTab, setActiveTab] = useState<"pending" | "payments" | "reports" | "actioned">("pending");
+  const [copiedPayment, setCopiedPayment] = useState("");
 
   const pending = listings.filter((l) => l.status === "pending");
   const live = listings.filter((l) => l.status === "live");
   const openReports = getOpenReports(reports);
   const approved = listings.filter((l) => l.status === "approved");
   const recordedRevenue = getPaidPaymentTotal(payments);
+  const sortedPayments = sortPaymentsNewest(payments);
   const paidRevenue = recordedRevenue || getPaidListingRevenue(listings);
   const pendingRevenue = getPendingListingRevenue(listings);
   const conversionBase = paidRevenue + pendingRevenue;
@@ -276,6 +278,14 @@ export default function AdminDashboardPage() {
   const handleResolveReport = (id: string) => {
     resolveReportById(id);
     addToast("Report marked resolved", "success");
+  };
+
+  const copyPaymentReference = (reference: string) => {
+    navigator.clipboard.writeText(reference).then(() => {
+      setCopiedPayment(reference);
+      setTimeout(() => setCopiedPayment(""), 1800);
+      addToast("Payment reference copied", "success");
+    });
   };
 
   const stats = [
@@ -370,6 +380,16 @@ export default function AdminDashboardPage() {
             Actioned ({actioned.length})
           </button>
           <button
+            onClick={() => setActiveTab("payments")}
+            className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
+              activeTab === "payments"
+                ? "bg-brand text-white shadow-sm"
+                : "text-[#64748B] hover:text-[#0F172A]"
+            }`}
+          >
+            Payments ({payments.length})
+          </button>
+          <button
             onClick={() => setActiveTab("reports")}
             className={`px-4 py-2 text-sm font-medium rounded-full transition-colors ${
               activeTab === "reports"
@@ -427,6 +447,48 @@ export default function AdminDashboardPage() {
                       <p className="text-xs text-[#94A3B8] mt-1">
                         {new Date(record.at).toLocaleTimeString()}
                       </p>
+                    </div>
+                  </div>
+                );
+              })
+            )}
+          </div>
+        )}
+
+        {/* Payments tab */}
+        {activeTab === "payments" && (
+          <div className="space-y-3">
+            {sortedPayments.length === 0 ? (
+              <div className="text-center py-20">
+                <p className="text-[#94A3B8] text-sm">No recorded payments yet.</p>
+              </div>
+            ) : (
+              sortedPayments.map((payment) => {
+                const listing = getListingById(payment.listing_id);
+                const provider = payment.provider ? PAYMENT_METHOD_LABELS[payment.provider] : "Mobile Money";
+                return (
+                  <div key={payment.id} className="rd-card rounded-[1.35rem] p-4 flex items-center gap-3">
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm font-black text-[#0F172A] truncate">
+                        {listing?.title ?? payment.listing_id}
+                      </p>
+                      <p className="text-xs text-[#64748B] mt-0.5">
+                        {listing?.landlord_name ?? payment.landlord_id} - {provider}
+                      </p>
+                      <p className="text-xs text-[#94A3B8] mt-0.5">
+                        {payment.paid_at ? new Date(payment.paid_at).toLocaleString() : "Paid"}
+                      </p>
+                    </div>
+                    <div className="text-right shrink-0">
+                      <p className="text-base font-black text-brand">GHS {payment.amount}</p>
+                      <button
+                        type="button"
+                        onClick={() => copyPaymentReference(payment.reference)}
+                        className="inline-flex items-center gap-1 text-xs font-bold text-[#64748B] hover:text-brand mt-1"
+                      >
+                        <Copy className="h-3 w-3" />
+                        {copiedPayment === payment.reference ? "Copied" : payment.reference}
+                      </button>
                     </div>
                   </div>
                 );
