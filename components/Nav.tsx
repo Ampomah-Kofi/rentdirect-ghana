@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle } from "lucide-react";
+import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle, ShieldCheck, Sparkles, UserCog } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 import { useFavoritesContext } from "@/components/providers/FavoritesProvider";
 import { MOCK_CONVERSATIONS } from "@/lib/mock-data";
@@ -54,6 +54,7 @@ export default function Nav() {
 
   const navLinks = [
     { href: "/browse", label: "Browse", icon: null },
+    { href: "/demo", label: "Demo", icon: Sparkles },
     { href: "/landlord/dashboard", label: "Landlord", icon: LayoutDashboard },
     { href: "/messages", label: "Messages", icon: MessageCircle },
   ];
@@ -70,12 +71,30 @@ export default function Nav() {
         }`}
       >
         <div className="rd-kente-strip h-1" />
+        <div className="hidden lg:block border-b border-black/5 bg-[#101A18] text-white">
+          <div className="max-w-7xl mx-auto px-4 h-9 flex items-center justify-between gap-4">
+            <div className="flex items-center gap-2">
+              <ShieldCheck className="h-3.5 w-3.5 text-[#F2B84B]" />
+              <span className="text-xs font-bold text-white/80">
+                Ghana-first rental infrastructure: verified landlords, MoMo receipts, tenant reports, and Rent Act-aware listings.
+              </span>
+            </div>
+            <div className="flex items-center gap-4 text-[11px] font-bold text-white/55">
+              <span>Tenants browse free</span>
+              <span>Landlords pay to publish</span>
+              <span>Built for Accra to Tamale</span>
+            </div>
+          </div>
+        </div>
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <LogoMark size={30} />
             <span className="text-brand font-black text-lg tracking-tight">
               Rent<span className="text-brand-dark">Direct</span>
+            </span>
+            <span className="hidden xl:inline-flex rounded-full bg-[#101A18] px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-[#F2B84B]">
+              Ghana
             </span>
           </Link>
 
@@ -123,6 +142,13 @@ export default function Nav() {
             >
               <PlusCircle className="w-4 h-4" />
               List a Room
+            </Link>
+            <Link
+              href="/admin"
+              className="flex items-center gap-1.5 rounded-full border border-black/10 bg-white px-4 py-2.5 text-sm font-black text-[#101A18] transition-all hover:border-brand hover:text-brand"
+            >
+              <UserCog className="w-4 h-4" />
+              Ops
             </Link>
           </div>
 
@@ -216,6 +242,14 @@ export default function Nav() {
               >
                 <PlusCircle className="w-5 h-5" />
                 List a Room
+              </Link>
+              <Link
+                href="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium border border-black/10 text-[#0F172A] mt-1"
+              >
+                <UserCog className="w-5 h-5" />
+                Admin Ops
               </Link>
             </div>
           </div>

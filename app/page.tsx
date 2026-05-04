@@ -628,7 +628,7 @@ export default function LandingPage() {
         {/*
             PRICING - Clear monetization for landlords
          */}
-        <section className="bg-surface py-20 px-4 border-y border-black/5">
+        <section id="pricing" className="bg-surface py-20 px-4 border-y border-black/5">
           <div className="max-w-6xl mx-auto">
             <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-5 mb-10">
               <div>
