@@ -226,6 +226,50 @@ const HOW: Record<"tenant"|"landlord", { n:string; icon:React.ComponentType<{cla
   ],
 };
 
+const OPERATING_SYSTEM = [
+  {
+    label: "Identity",
+    title: "Know who is listing",
+    body: "Ghana Card, profile photo, landlord phone and admin review before a room can go live.",
+  },
+  {
+    label: "Payments",
+    title: "Track every activation",
+    body: "MoMo-style payment records, receipt references and revenue dashboards for serious operations.",
+  },
+  {
+    label: "Safety",
+    title: "Catch risk early",
+    body: "Tenant reports, Rent Act reminders and admin resolution queues protect people before money moves.",
+  },
+  {
+    label: "Distribution",
+    title: "Help rooms move faster",
+    body: "Featured listings, regional search and shareable pages help landlords reach real tenants directly.",
+  },
+];
+
+const AUDIENCES = [
+  {
+    title: "For tenants in Ghana",
+    body: "Search rooms, compare advance rent, save favourites, message landlords and report suspicious listings.",
+    href: "/browse",
+    cta: "Find a room",
+  },
+  {
+    title: "For landlords",
+    body: "List rooms, pass review, pay once by MoMo-style activation, track views and keep receipt history.",
+    href: "/landlord/upload",
+    cta: "List a room",
+  },
+  {
+    title: "For family abroad",
+    body: "Share verified listings with people back home and help them avoid agent fees, fake rooms and pressure payments.",
+    href: "/demo",
+    cta: "See the demo",
+  },
+];
+
 //  Main Landing Page 
 
 export default function LandingPage() {
@@ -596,6 +640,91 @@ export default function LandingPage() {
             </div>
           </section>
         )}
+
+        {/*
+            MARKETPLACE OS - Big company positioning
+         */}
+        <section className="relative overflow-hidden bg-[#101A18] py-24 px-4 text-white rd-grain">
+          <div className="absolute -right-24 top-0 h-96 w-96 rounded-full bg-brand/25 blur-3xl" />
+          <div className="absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-[#F2B84B]/15 blur-3xl" />
+          <div className="relative max-w-6xl mx-auto">
+            <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+              <div>
+                <p className="text-[11px] font-black text-[#F2B84B] uppercase tracking-[0.24em] mb-4">The Bigger Vision</p>
+                <h2 className="text-4xl sm:text-5xl font-black leading-[1.02] tracking-tight">
+                  Not just listings.<br />Rental infrastructure for Ghana.
+                </h2>
+                <p className="mt-5 text-base leading-relaxed text-white/62">
+                  RentDirect can become the trust layer between tenants, landlords, diaspora families and property operators. The website should feel like a marketplace today and an operating system tomorrow.
+                </p>
+                <div className="mt-7 flex flex-wrap gap-3">
+                  <Link href="/demo/autopilot" className="inline-flex items-center gap-2 rounded-2xl bg-white px-6 py-3.5 text-sm font-black text-[#101A18] hover:bg-[#F2B84B]">
+                    Watch Autopilot <ArrowRight className="w-4 h-4" />
+                  </Link>
+                  <Link href="/admin" className="inline-flex items-center gap-2 rounded-2xl border border-white/20 px-6 py-3.5 text-sm font-black text-white hover:bg-white/10">
+                    View Operations
+                  </Link>
+                </div>
+              </div>
+
+              <div className="grid gap-3 sm:grid-cols-2">
+                {OPERATING_SYSTEM.map((item) => (
+                  <div key={item.label} className="rounded-[1.5rem] border border-white/10 bg-white/7 p-5 backdrop-blur">
+                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#F2B84B]">{item.label}</p>
+                    <h3 className="mt-3 text-base font-black text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-white/55">{item.body}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-10 grid gap-3 sm:grid-cols-4">
+              {[
+                { value: "0%", label: "tenant commission" },
+                { value: "GHS 50", label: "standard activation" },
+                { value: "GHS 100", label: "featured upsell" },
+                { value: "24h", label: "report review goal" },
+              ].map((item) => (
+                <div key={item.label} className="rounded-2xl border border-white/10 bg-black/18 px-5 py-4">
+                  <p className="text-2xl font-black text-[#F2B84B]">{item.value}</p>
+                  <p className="mt-1 text-[10px] font-black uppercase tracking-[0.16em] text-white/42">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/*
+            AUDIENCE ROUTES - Clear conversion paths
+         */}
+        <section className="bg-[#FFF8EA] py-20 px-4 border-y border-black/5">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-10">
+              <p className="text-[11px] font-black text-brand uppercase tracking-[0.22em] mb-3">Built For The Whole Rental Circle</p>
+              <h2 className="text-3xl sm:text-4xl font-black text-[#0A0A0A]">One platform, three people served.</h2>
+              <p className="text-sm text-[#64748B] mt-3 max-w-xl mx-auto leading-relaxed">
+                Ghana rentals are not only tenant and landlord. Family abroad often helps search, verify and pay. RentDirect should support that reality from day one.
+              </p>
+            </div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {AUDIENCES.map((audience, index) => (
+                <div key={audience.title} className="rd-card rounded-[1.6rem] p-6 relative overflow-hidden">
+                  <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-light" />
+                  <div className="relative">
+                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-brand text-xs font-black text-white">
+                      0{index + 1}
+                    </span>
+                    <h3 className="mt-5 text-lg font-black text-[#0F172A]">{audience.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed text-[#64748B]">{audience.body}</p>
+                    <Link href={audience.href} className="mt-6 inline-flex items-center gap-2 text-sm font-black text-brand hover:underline">
+                      {audience.cta} <ArrowRight className="w-4 h-4" />
+                    </Link>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* 
             BENEFITS - Why RentDirect

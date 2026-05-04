@@ -31,6 +31,7 @@ test("prototype guide shows clickable demo paths and test commands", async ({ pa
   await expect(page.getByRole("heading", { name: "Click the whole company into shape." })).toBeVisible();
   await expect(page.getByRole("link", { name: /Start as Tenant/ })).toHaveAttribute("href", "/browse");
   await expect(page.getByRole("link", { name: /Start as Landlord/ })).toHaveAttribute("href", "/landlord/upload");
+  await expect(page.getByRole("link", { name: /Open Flow/ }).first()).toBeVisible();
   await expect(page.getByText("& npm.cmd run test")).toBeVisible();
   await expect(page.getByText("& npm.cmd run typecheck")).toBeVisible();
 });
