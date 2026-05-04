@@ -6,6 +6,7 @@ import { ListingsProvider } from "@/components/providers/ListingsProvider";
 import { CompareProvider } from "@/components/providers/CompareProvider";
 import { ReportsProvider } from "@/components/providers/ReportsProvider";
 import { PaymentsProvider } from "@/components/providers/PaymentsProvider";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 import CompareBar from "@/components/CompareBar";
 import ViewModeIndicator from "@/components/ViewModeIndicator";
 
@@ -41,21 +42,23 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </head>
       <body className="min-h-screen flex flex-col bg-surface text-[#0F172A]">
-        <ListingsProvider>
-          <ReportsProvider>
-            <PaymentsProvider>
-              <CompareProvider>
-                <FavoritesProvider>
-                  <ToastProvider>
-                    {children}
-                    <CompareBar />
-                    <ViewModeIndicator />
-                  </ToastProvider>
-                </FavoritesProvider>
-              </CompareProvider>
-            </PaymentsProvider>
-          </ReportsProvider>
-        </ListingsProvider>
+        <AuthProvider>
+          <ListingsProvider>
+            <ReportsProvider>
+              <PaymentsProvider>
+                <CompareProvider>
+                  <FavoritesProvider>
+                    <ToastProvider>
+                      {children}
+                      <CompareBar />
+                      <ViewModeIndicator />
+                    </ToastProvider>
+                  </FavoritesProvider>
+                </CompareProvider>
+              </PaymentsProvider>
+            </ReportsProvider>
+          </ListingsProvider>
+        </AuthProvider>
       </body>
     </html>
   );

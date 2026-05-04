@@ -64,3 +64,19 @@ test("trust and legal pages render production readiness content", async ({ page 
   await expect(page.getByRole("heading", { name: "Clear rules build trust." })).toBeVisible();
   await expect(page.getByText("Prototype status")).toBeVisible();
 });
+
+test("demo auth lets users choose a role and persists the session", async ({ page }) => {
+  await page.goto("/auth");
+
+  await expect(page.getByRole("heading", { name: /Sign in as tenant, landlord, or ops/ })).toBeVisible();
+  await expect(page.getByText("Current session")).toBeVisible();
+
+  await page.getByRole("button", { name: "Continue as landlord" }).click();
+  await expect(page).toHaveURL(/\/landlord\/dashboard/);
+  await expect(page.getByText("Welcome back, Kwame Asante")).toBeVisible();
+
+  await page.goto("/auth");
+  await expect(page.getByText("Kwame Asante (landlord)")).toBeVisible();
+  await page.getByRole("button", { name: "Sign out demo user" }).click();
+  await expect(page.getByText("Guest")).toBeVisible();
+});

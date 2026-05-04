@@ -3,9 +3,10 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle, ShieldCheck, Sparkles, UserCog, Megaphone } from "lucide-react";
+import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle, ShieldCheck, Sparkles, UserCog, Megaphone, LogIn, UserRound } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 import { useFavoritesContext } from "@/components/providers/FavoritesProvider";
+import { useAuth } from "@/components/providers/AuthProvider";
 import { MOCK_CONVERSATIONS } from "@/lib/mock-data";
 
 const LANDLORD_ID = "user-101";
@@ -45,6 +46,7 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { count: savedCount } = useFavoritesContext();
+  const { session } = useAuth();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 8);
@@ -151,6 +153,13 @@ export default function Nav() {
               <UserCog className="w-4 h-4" />
               Ops
             </Link>
+            <Link
+              href="/auth"
+              className="flex items-center gap-1.5 rounded-full border border-black/10 bg-[#101A18] px-4 py-2.5 text-sm font-black text-white transition-all hover:bg-brand"
+            >
+              {session ? <UserRound className="w-4 h-4" /> : <LogIn className="w-4 h-4" />}
+              {session ? session.user.role : "Sign in"}
+            </Link>
           </div>
 
           {/* Mobile right side */}
@@ -168,6 +177,12 @@ export default function Nav() {
               className="rd-button-primary rounded-full px-3 py-1.5 text-xs font-black"
             >
               List Room
+            </Link>
+            <Link
+              href="/auth"
+              className="rounded-full border border-black/10 bg-white px-3 py-1.5 text-xs font-black text-[#101A18]"
+            >
+              {session ? session.user.role : "Sign in"}
             </Link>
             <button
               onClick={() => setMenuOpen(true)}
@@ -251,6 +266,14 @@ export default function Nav() {
               >
                 <UserCog className="w-5 h-5" />
                 Admin Ops
+              </Link>
+              <Link
+                href="/auth"
+                onClick={() => setMenuOpen(false)}
+                className="flex items-center gap-3 px-3 py-3 rounded-xl text-sm font-medium border border-black/10 text-[#0F172A] mt-1"
+              >
+                {session ? <UserRound className="w-5 h-5" /> : <LogIn className="w-5 h-5" />}
+                {session ? `Signed in: ${session.user.role}` : "Sign in"}
               </Link>
             </div>
           </div>

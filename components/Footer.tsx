@@ -34,6 +34,7 @@ export default function Footer() {
     {
       title: "Company",
       links: [
+        { href: "/auth", label: "Sign In" },
         { href: "/launch", label: "Launch Plan" },
         { href: "/privacy", label: "Privacy" },
         { href: "/terms", label: "Terms" },

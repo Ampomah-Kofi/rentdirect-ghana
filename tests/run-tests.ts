@@ -2,12 +2,14 @@ import { monetizationTests, type TestCase } from "./monetization.test.ts";
 import { listingWorkflowTests } from "./listing-workflow.test.ts";
 import { reportTests } from "./reports.test.ts";
 import { paymentTests } from "./payments.test.ts";
+import { authTests } from "./auth.test.ts";
 
 const tests: TestCase[] = [
   ...monetizationTests,
   ...listingWorkflowTests,
   ...reportTests,
   ...paymentTests,
+  ...authTests,
 ];
 
 let passed = 0;
