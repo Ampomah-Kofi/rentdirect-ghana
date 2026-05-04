@@ -35,3 +35,18 @@ test("prototype guide shows clickable demo paths and test commands", async ({ pa
   await expect(page.getByText("& npm.cmd run test")).toBeVisible();
   await expect(page.getByText("& npm.cmd run typecheck")).toBeVisible();
 });
+
+test("launch page captures local pilot interest", async ({ page }) => {
+  await page.goto("/launch");
+
+  await expect(page.getByRole("heading", { name: "Win city by city. Trust first." })).toBeVisible();
+  await page.getByPlaceholder("Name").fill("Kofi Ampomah");
+  await page.getByPlaceholder("Phone or WhatsApp").fill("0244123456");
+  await page.getByRole("combobox").first().selectOption("Diaspora helper");
+  await page.getByRole("combobox").nth(1).selectOption("Kumasi");
+  await page.getByRole("button", { name: "Join Pilot List" }).click();
+
+  await expect(page.getByText("Saved locally.")).toBeVisible();
+  await expect(page.getByText("Kofi Ampomah")).toBeVisible();
+  await expect(page.getByText("Diaspora helper - Kumasi")).toBeVisible();
+});

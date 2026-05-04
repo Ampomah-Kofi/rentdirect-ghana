@@ -9,6 +9,7 @@ export default function Footer() {
         { href: "/browse", label: "Browse Rooms" },
         { href: "/compare", label: "Compare Listings" },
         { href: "/messages", label: "Messages" },
+        { href: "/launch", label: "Launch Plan" },
         { href: "/demo", label: "Prototype Tour" },
       ],
     },

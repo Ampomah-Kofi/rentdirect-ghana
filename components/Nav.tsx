@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle, ShieldCheck, Sparkles, UserCog } from "lucide-react";
+import { Menu, X, LayoutDashboard, PlusCircle, Clock, Heart, MessageCircle, ShieldCheck, Sparkles, UserCog, Megaphone } from "lucide-react";
 import { LogoMark } from "@/components/Logo";
 import { useFavoritesContext } from "@/components/providers/FavoritesProvider";
 import { MOCK_CONVERSATIONS } from "@/lib/mock-data";
@@ -54,6 +54,7 @@ export default function Nav() {
 
   const navLinks = [
     { href: "/browse", label: "Browse", icon: null },
+    { href: "/launch", label: "Launch", icon: Megaphone },
     { href: "/demo", label: "Demo", icon: Sparkles },
     { href: "/landlord/dashboard", label: "Landlord", icon: LayoutDashboard },
     { href: "/messages", label: "Messages", icon: MessageCircle },
