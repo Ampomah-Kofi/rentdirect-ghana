@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import { useListings } from "@/components/providers/ListingsProvider";
 import ListingCard from "@/components/ListingCard";
 import { LogoMark } from "@/components/Logo";
+import { KenteSymbolRow } from "@/components/GhanaSymbols";
 import { GHANA_REGIONS } from "@/lib/ghana-locations";
 import { LISTING_PLANS } from "@/lib/monetization";
 import type { Room } from "@/lib/types";
@@ -341,9 +342,9 @@ export default function LandingPage() {
             HERO - Split layout: pitch + search | listing cards
          */}
         <section
-          className="relative overflow-hidden"
-          style={{ background:"linear-gradient(155deg,#07100e 0%,#0c2d22 45%,#0F6E56 100%)" }}
+          className="relative overflow-hidden rd-kente-weave"
         >
+          <div className="rd-adinkra-watermark" />
           {/* Fine grid overlay */}
           <div className="absolute inset-0 opacity-[0.035]"
             style={{ backgroundImage:"linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px)", backgroundSize:"48px 48px" }} />
@@ -384,7 +385,7 @@ export default function LandingPage() {
                   className="text-base sm:text-lg text-green-100/65 max-w-lg mx-auto lg:mx-0 leading-relaxed mb-8"
                   style={{ animation:"fadeUp .55s ease .3s both" }}
                 >
-                  Connect directly with verified landlords across all 16 regions of Ghana.
+                  A Ghana-first rental marketplace with kente energy, trusted landlord workflows, and direct access across all 16 regions.
                   No 10% fees. No delays. Just you and your next home.
                 </p>
 
@@ -477,6 +478,7 @@ export default function LandingPage() {
                     </div>
                   ))}
                 </div>
+                <KenteSymbolRow className="mt-8 max-w-2xl" />
               </div>
 
               {/*  Right: Floating listing cards (desktop)  */}
@@ -552,6 +554,23 @@ export default function LandingPage() {
             ))}
           </div>
         </div>
+
+        <section className="relative overflow-hidden border-b border-black/10 bg-[#101A18] px-4 py-12 text-white">
+          <div className="rd-kente-strip absolute inset-x-0 top-0 h-2" />
+          <div className="rd-adinkra-watermark" />
+          <div className="relative mx-auto grid max-w-6xl gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
+            <div>
+              <p className="text-[11px] font-black uppercase tracking-[0.22em] text-[#F2B84B]">Ghana visual language</p>
+              <h2 className="mt-3 text-3xl font-black tracking-tight sm:text-4xl">
+                Built with kente rhythm and symbols of trust.
+              </h2>
+              <p className="mt-4 max-w-xl text-sm leading-6 text-white/62">
+                The interface now carries Ghanaian pattern language through woven color bands, warm gold and clay accents, and Adinkra-inspired marks for safety, independence, memory, and strength.
+              </p>
+            </div>
+            <KenteSymbolRow />
+          </div>
+        </section>
 
         {/* 
             HOW IT WORKS - Tab: Tenant / Landlord

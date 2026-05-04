@@ -22,6 +22,8 @@ export function LogoMark({ size = 32, className = "" }: LogoProps) {
         </linearGradient>
       </defs>
       <rect width="40" height="40" rx="14" fill="url(#rentdirect-mark)" />
+      <path d="M0 9H40" stroke="#F2B84B" strokeWidth="3" strokeDasharray="5 4" opacity="0.95" />
+      <path d="M0 34H40" stroke="#B85B34" strokeWidth="3" strokeDasharray="7 3" opacity="0.9" />
       <path d="M6 32H34" stroke="#F2B84B" strokeWidth="2.5" strokeLinecap="round" />
       <path
         d="M20 9L32 19H8L20 9Z"

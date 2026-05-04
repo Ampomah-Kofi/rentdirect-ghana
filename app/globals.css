@@ -103,5 +103,50 @@ body {
 
 .rd-kente-strip {
   background:
-    linear-gradient(90deg, #0B6B4B 0 18%, #F2B84B 18% 32%, #B85B34 32% 46%, #101A18 46% 58%, #0B6B4B 58% 100%);
+    repeating-linear-gradient(90deg,
+      #101A18 0 12px,
+      #F2B84B 12px 22px,
+      #B85B34 22px 34px,
+      #0B6B4B 34px 52px,
+      #111827 52px 60px,
+      #F2B84B 60px 66px,
+      #0B6B4B 66px 84px);
+}
+
+.rd-kente-weave {
+  background-color: #101A18;
+  background-image:
+    linear-gradient(45deg, rgba(242, 184, 75, 0.18) 25%, transparent 25%, transparent 75%, rgba(242, 184, 75, 0.18) 75%),
+    linear-gradient(45deg, rgba(184, 91, 52, 0.18) 25%, transparent 25%, transparent 75%, rgba(184, 91, 52, 0.18) 75%),
+    repeating-linear-gradient(90deg, rgba(11, 107, 75, 0.32) 0 10px, rgba(16, 26, 24, 0.1) 10px 20px, rgba(242, 184, 75, 0.18) 20px 24px),
+    linear-gradient(135deg, #07100e 0%, #0c2d22 54%, #0B6B4B 100%);
+  background-position: 0 0, 12px 12px, 0 0, 0 0;
+  background-size: 24px 24px, 24px 24px, 48px 48px, auto;
+}
+
+.rd-kente-panel {
+  background:
+    linear-gradient(135deg, rgba(16, 26, 24, 0.92), rgba(11, 107, 75, 0.86)),
+    repeating-linear-gradient(90deg, #F2B84B 0 14px, #B85B34 14px 28px, #101A18 28px 42px, #0B6B4B 42px 58px);
+}
+
+.rd-adinkra-watermark {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.08;
+  background-image:
+    radial-gradient(circle at 20px 20px, transparent 0 7px, #F2B84B 7px 8px, transparent 9px),
+    linear-gradient(45deg, transparent 46%, #F2B84B 47%, #F2B84B 53%, transparent 54%);
+  background-size: 72px 72px;
+}
+
+.rd-symbol-tile {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
 }
